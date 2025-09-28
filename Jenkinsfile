@@ -31,7 +31,7 @@ pipeline
                 echo "Building Docker image..."
                 script
                 {
-                    docker.build("calculator_spe:latest")
+                    docker.build("kandarp53/calculator_spe:latest")
                 }
             }
         }
