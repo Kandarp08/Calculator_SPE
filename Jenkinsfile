@@ -58,7 +58,7 @@ pipeline
                 script
                 {
                     docker.withRegistry("https://index.docker.io/v1/", "dockerhub-credentials") {
-                        docker.image("calculator_spe:latest").push()
+                        docker.image("kandarp53/calculator_spe:latest").push()
                     }
                 }
             }
