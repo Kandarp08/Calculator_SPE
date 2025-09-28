@@ -15,6 +15,9 @@ target/
 .dockerignore
 Dockerfile
 
+#Jenkins file
+Jenkinsfile
+
 # Temporary files
 *.swp
 *.tmp

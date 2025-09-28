@@ -13,7 +13,7 @@ pipeline
             }
         }
 
-        stage("Check Docker")
+        stage("Check Docker version")
         {
             steps
             {
@@ -32,20 +32,6 @@ pipeline
                 script
                 {
                     docker.build("kandarp53/calculator_spe:latest")
-                }
-            }
-        }
-
-        stage("Login to Dockerhub")
-        {
-            steps
-            {
-                echo "Logging in to Dockerhub..."
-                script
-                {
-                    docker.withRegistry("https://index.docker.io/v1/", "dockerhub-credentials") {
-                        // Dockerhub login
-                    }
                 }
             }
         }
