@@ -17,7 +17,7 @@ pipeline
         {
             steps
             {
-                echo "Checking docker and docker compose versions..."
+                echo "Checking docker version..."
                 sh '''
                 docker version
                 '''
@@ -44,7 +44,7 @@ pipeline
                 script
                 {
                     docker.withRegistry("https://index.docker.io/v1/", "dockerhub-credentials") {
-                        // Docker registry login happens here
+                        // Dockerhub login
                     }
                 }
             }
