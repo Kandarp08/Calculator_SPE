@@ -10,7 +10,6 @@ pipeline
             {
                 echo "Testing Calculator..."
                 sh "mvn test"
-                echo "Test execution completed."
             }
         }
 
@@ -23,7 +22,6 @@ pipeline
                 docker version
                 docker compose version
                 '''
-                echo "Check completed."
             }
         }
 
@@ -35,6 +33,34 @@ pipeline
                 script
                 {
                     docker.build("calculator_spe:latest")
+                }
+            }
+        }
+
+        stage("Login to Dockerhub")
+        {
+            steps
+            {
+                echo "Logging in to Dockerhub..."
+                script
+                {
+                    docker.withRegistry("https://index.docker.io/v1/", "dockerhub-credentials") {
+                        // Docker registry login happens here
+                    }
+                }
+            }
+        }
+
+        stage("Push Docker image to Registry")
+        {
+            steps
+            {
+                echo "Pushing Docker image to Dockerhub..."
+                script
+                {
+                    docker.withRegistry("https://index.docker.io/v1/", "dockerhub-credentials") {
+                        docker.image("calculator_spe:latest").push()
+                    }
                 }
             }
         }
