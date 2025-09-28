@@ -1,0 +1,21 @@
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# Maven target directories
+target/
+*/target/
+
+# Git
+.git
+.gitignore
+
+# Docker files themselves
+.dockerignore
+Dockerfile
+
+# Temporary files
+*.swp
+*.tmp
+*.bak
