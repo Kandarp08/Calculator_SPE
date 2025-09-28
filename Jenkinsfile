@@ -20,7 +20,6 @@ pipeline
                 echo "Checking docker and docker compose versions..."
                 sh '''
                 docker version
-                docker compose version
                 '''
             }
         }
