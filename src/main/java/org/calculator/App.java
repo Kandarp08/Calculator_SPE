@@ -20,11 +20,11 @@ public class App
 
         while (true)
         {
-            System.out.print("Enter your choice: ");
-            int opt = scan.nextInt();
-
             try
             {
+                System.out.print("Enter your choice: ");
+                int opt = scan.nextInt();
+
                 if (opt == 1)
                 {
                     System.out.print("Enter an integer: ");
