@@ -1,26 +1,22 @@
-# Stage 1: Build the application
-FROM maven:3.9.9-amazoncorretto-21 AS build
-
-# Set the working directory inside the container
+# Stage 1: Build
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
 WORKDIR /app
 
-# Copy the pom.xml and download the dependencies
-COPY pom.xml ./
+# Copy pom.xml and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Copy the entire project source code
-COPY ./src /app/src
+# Copy source code (don't include tests)
+COPY src/main/ ./src/main
 
-# Package the application
-RUN mvn clean install -DskipTests
+# Package without tests
+RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application
-FROM openjdk:21-jdk-slim AS run
-
-# Set the working directory inside the container
+# Stage 2: Run
+FROM eclipse-temurin:21-jre-alpine AS run
 WORKDIR /app
 
-# Copy the jar file from the build stage
-COPY --from=build /app/target/*.jar ./app.jar
+# Copy only the final jar
+COPY --from=build /app/target/*-SNAPSHOT.jar app.jar
 
-# Command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
