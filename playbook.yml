@@ -1,5 +1,4 @@
 - name: Deploy Calculator App
-
   hosts: myhosts
 
   tasks:
