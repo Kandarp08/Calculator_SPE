@@ -1,5 +1,6 @@
 - name: Deploy Calculator App
   hosts: myhosts
+  become: true
 
   tasks:
     - name: Remove old containers
