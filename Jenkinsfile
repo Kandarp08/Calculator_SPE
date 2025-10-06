@@ -49,5 +49,17 @@ pipeline
                 }
             }
         }
+
+        stage("Deploy using Ansible")
+        {
+            steps
+            {
+                ansiblePlaybook(
+                    installation: "Ansible",
+                    inventory: "inventory.ini",
+                    playbook: "playbook.yml",
+                )
+            }
+        }
     }
 }
