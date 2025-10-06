@@ -2,6 +2,11 @@ pipeline
 {
     agent any
 
+    environment
+    {
+        PATH = "/home/kandarp/.local/bin:/usr/local/bin:/usr/bin:/bin"
+    }
+
     stages
     {
         stage("Run Tests")
