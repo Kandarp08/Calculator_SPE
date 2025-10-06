@@ -2,11 +2,6 @@ pipeline
 {
     agent any
 
-    environment
-    {
-        PATH = "/home/kandarp/.local/bin:/usr/local/bin:/usr/bin:/bin"
-    }
-
     stages
     {
         stage("Run Tests")
@@ -59,11 +54,7 @@ pipeline
         {
             steps
             {
-                ansiblePlaybook(
-                    installation: "Ansible",
-                    inventory: "inventory.ini",
-                    playbook: "playbook.yml",
-                )
+                sh 'ansible-playbook -i inventory.ini playbook.yml"
             }
         }
     }
