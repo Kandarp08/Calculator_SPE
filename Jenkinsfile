@@ -74,12 +74,9 @@ pipeline
                 def buildNumber = env.BUILD_NUMBER
                 def pipelineStatus = currentBuild.result ?: "SUCCESS"
 
-                emailext(
-                    subject: "${jobName} - Build ${buildNumber}",
-                    body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
-                    to: "davekandarp2004@gmail.com",
-                    from: "davekandarp2004@gmail.com"
-                )
+                mail to: "Dave.Kandarp@iiitb.ac.in",
+                subject: "${jobName} - Build ${buildNumber}",
+                body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
             }
 
             echo "Cleaning workspace..."
