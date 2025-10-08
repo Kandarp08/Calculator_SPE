@@ -65,7 +65,7 @@ pipeline
         {
             def jobName = env.JOB_NAME
             def buildNumber = env.BUILD_NUMBER
-            def pipelineStatus = currentBuild.result ? : "UNKNOWN"
+            def pipelineStatus = currentBuild.result ?: "UNKNOWN"
 
             echo "Cleaning workspace..."
             cleanWs()
