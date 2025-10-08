@@ -2,6 +2,11 @@ pipeline
 {
     agent any
 
+    options
+    {
+        skipStagesAfterUnstable()
+    }
+
     stages
     {
         stage("Run Tests")
@@ -63,19 +68,22 @@ pipeline
     {
         always
         {
-            def jobName = env.JOB_NAME
-            def buildNumber = env.BUILD_NUMBER
-            def pipelineStatus = currentBuild.result ?: "UNKNOWN"
+            script
+            {
+                def jobName = env.JOB_NAME
+                def buildNumber = env.BUILD_NUMBER
+                def pipelineStatus = currentBuild.result ?: "SUCCESS"
+
+                emailext(
+                    subject: "${jobName} - Build ${buildNumber}",
+                    body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
+                    to: "Dave.Kandarp@iiitb.ac.in",
+                    from: "davekandarp2004@gmail.com"
+                )
+            }
 
             echo "Cleaning workspace..."
             cleanWs()
-
-            emailext(
-                subject: "${jobName} - Build ${buildNumber}",
-                body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
-                to: "Dave.Kandarp@iiitb.ac.in",
-                from: "davekandarp2004@gmail.com",
-            )
         }
     }
 }
