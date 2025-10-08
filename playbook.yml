@@ -1,19 +1,22 @@
-- name: Deploy Calculator App
+---
+- name: Pull Docker Image from Docker Hub
   hosts: myhosts
   become: true
 
   tasks:
-    - name: Remove old containers
-      docker_container:
-        name: calculator
-        state: absent
-        force_kill: yes
+    - name: Pull Docker image
+      docker_image:
+        name: "kandarp53/calculator_spe"
+        source: pull
+      register: docker_pull_result
 
-    - name: Deploy Calculator App
-      docker_container:
-        name: calculator
-        image: kandarp53/calculator_spe
+    - name: Display Docker pull result
+      debug:
+        var: docker_pull_result
+
+    - name: Start Docker service
+      service:
+        name: docker
         state: started
-        restart: yes
-        interactive: yes
-        detach: yes
+    - name: Running container
+      shell: docker run -it -d --name calculator kandarp53/calculator_spe /bin/bash
