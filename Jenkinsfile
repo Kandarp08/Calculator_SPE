@@ -75,12 +75,12 @@ pipeline
                 def pipelineStatus = currentBuild.result ?: "SUCCESS"
 
                 mail to: "Dave.Kandarp@iiitb.ac.in",
-                subject: "${jobName} - Build ${buildNumber}",
-                body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
-            }
+                    subject: "${jobName} - Build ${buildNumber}",
+                    body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}"
 
-            echo "Cleaning workspace..."
-            cleanWs()
+                echo "Cleaning workspace..."
+                cleanWs()
+            }
         }
     }
 }
