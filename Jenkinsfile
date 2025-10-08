@@ -77,7 +77,7 @@ pipeline
                 emailext(
                     subject: "${jobName} - Build ${buildNumber}",
                     body: "Calculator project pipeline status: ${pipelineStatus.toUpperCase()}",
-                    to: "Dave.Kandarp@iiitb.ac.in",
+                    to: "davekandarp2004@gmail.com",
                     from: "davekandarp2004@gmail.com"
                 )
             }
